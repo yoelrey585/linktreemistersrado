@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiSTERSRADO - Same Time Out Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px 40px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-tagline {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* New Release Badge */
+        .new-release-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Song Cover Section */
+        .song-cover-section {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .song-cover {
+            width: 280px;
+            height: 280px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .song-cover:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+
+        .song-title {
+            color: white;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 20px 0 8px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .song-artist {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .song-meta {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 680px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .link-button {
+            background: white;
+            color: #333;
+            text-decoration: none;
+            padding: 18px 24px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-button i {
+            font-size: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            color: white;
+            font-size: 28px;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+
+        .social-icon.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Platform-specific colors on hover */
+        .link-button.spotify:hover { background: #1DB954; color: white; }
+        .link-button.apple-music:hover { background: #FA243C; color: white; }
+        .link-button.soundcloud:hover { background: #FF5500; color: white; }
+        .link-button.youtube:hover { background: #FF0000; color: white; }
+        .link-button.audiomack:hover { background: #D93333; color: white; }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 40px 16px 30px;
+            }
+
+            .profile-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .profile-name {
+                font-size: 24px;
+            }
+
+            .song-cover {
+                width: 240px;
+                height: 240px;
+            }
+
+            .song-title {
+                font-size: 28px;
+            }
+
+            .link-button {
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-section">
+        <img src="images/MiSTERSRADO.png" alt="MiSTERSRADO" class="profile-image">
+        <h1 class="profile-name">MiSTERSRADO</h1>
+        <p class="profile-tagline">Artist • Creator </p>
+    </div>
+
+    <div class="new-release-badge">
+        <i class="fas fa-fire"></i> New Release
+    </div>
+
+    <div class="song-cover-section">
+        <img src="images/STcover.png" alt="Same Time - MiSTERSRADO" class="song-cover">
+        <h2 class="song-title">Same Time</h2>
+        <p class="song-artist">MiSTERSRADO</p>
+        <p class="song-meta">2:32 • Out Now</p>
+    </div>
+
+    <div class="links-container">
+        <p class="section-title">Stream "Same Time" on your favorite platform</p>
+        
+        <a href="https://open.spotify.com/track/2YcZNQcu4JytSWAMgkje6w?si=3e6064c27ac644cb" target="_blank" class="link-button spotify">
+            <i class="fab fa-spotify"></i>
+            Listen on Spotify
+        </a>
+
+        <a href="https://music.apple.com/gh/song/same-time/6809728954" target="_blank" class="link-button apple-music">
+            <i class="fab fa-apple"></i>
+            Listen on Apple Music
+        </a>
+
+        <a href="#" target="_blank" class="link-button audiomack">
+            <i class="fas fa-music"></i>
+            Listen on Audiomack
+        </a>
+
+        <a href="https://music.youtube.com/watch?v=anw24iJ5oEY&si=M0XCQYUeO4qO-2kp" target="_blank" class="link-button youtube">
+            <i class="fab fa-youtube"></i>
+            Listen on YouTube Music
+        </a>
+
+        <a href="https://on.soundcloud.com/GrdvRm0rgONhsKxAUa" target="_blank" class="link-button soundcloud">
+            <i class="fab fa-soundcloud"></i>
+            Listen on SoundCloud
+        </a>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://www.instagram.com/mistersradotheartist?stkn=Z3d4Y21scGM0OG9k&utm_source=qr" target="_blank" class="social-icon" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@mistersradotheartist?_r=1&_t=ZS-99kI7sH3aV7" target="_blank" class="social-icon" title="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="#" class="social-icon disabled" title="Website - Coming Soon">
+            <i class="fas fa-globe"></i>
+        </a>
+        <a href="#" class="social-icon disabled" title="More Links">
+            <i class="fas fa-link"></i>
+        </a>
+    </div>
+</body>
+</html>
